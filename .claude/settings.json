@@ -5,7 +5,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "cd /Users/benjaminogbesor/Desktop/Tryout-Scout && git add -A && git diff --cached --quiet || (git commit -m \"Auto-checkpoint: session changes $(date '+%Y-%m-%d %H:%M')\" && git push origin main)",
+            "command": "cd /Users/benjaminogbesor/Desktop/Tryout-Scout && /usr/bin/git add -A && /usr/bin/git diff --cached --quiet || (/usr/bin/git commit -m \"Auto-checkpoint: session changes $(date '+%Y-%m-%d %H:%M')\" && /usr/bin/git push origin main)",
             "timeout": 30,
             "statusMessage": "Saving your work to GitHub..."
           }
