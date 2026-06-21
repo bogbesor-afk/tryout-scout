@@ -1,9 +1,19 @@
 import { supabase } from "@/lib/supabase";
 import Link from "next/link";
+import TranscribeButton from "@/components/TranscribeButton";
 
 async function getSession(id: string) {
   const { data } = await supabase.from("sessions").select("*").eq("id", id).single();
   return data;
+}
+
+async function getPendingRecordings(sessionId: string) {
+  const { data } = await supabase
+    .from("recordings")
+    .select("*")
+    .eq("session_id", sessionId)
+    .eq("status", "pending");
+  return data ?? [];
 }
 
 function formatDate(dateStr: string) {
@@ -21,6 +31,7 @@ export default async function SessionDetailPage({
 }) {
   const { id } = await params;
   const session = await getSession(id);
+  const pendingRecordings = await getPendingRecordings(id);
 
   if (!session) {
     return (
@@ -43,6 +54,15 @@ export default async function SessionDetailPage({
 
       {session.notes && (
         <p className="text-sm text-gray-600 mb-8 bg-gray-50 rounded-xl px-4 py-3">{session.notes}</p>
+      )}
+
+      {pendingRecordings.length > 0 && (
+        <div className="mb-6 bg-yellow-50 border border-yellow-200 rounded-xl px-4 py-3">
+          <p className="text-sm font-medium text-yellow-800 mb-2">
+            {pendingRecordings.length} recording{pendingRecordings.length > 1 ? "s" : ""} ready to transcribe
+          </p>
+          <TranscribeButton recordings={pendingRecordings} sessionId={id} />
+        </div>
       )}
 
       <div className="flex flex-col gap-3">
