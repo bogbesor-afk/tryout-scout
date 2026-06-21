@@ -42,9 +42,10 @@ export default async function RosterPage() {
       ) : (
         <div className="flex flex-col gap-3">
           {players.map((player) => (
-            <div
+            <Link
               key={player.id}
-              className="bg-white border border-gray-200 rounded-xl px-4 py-4 flex items-center justify-between"
+              href={`/roster/${player.id}`}
+              className="bg-white border border-gray-200 rounded-xl px-4 py-4 flex items-center justify-between hover:bg-gray-50 transition-colors"
             >
               <div>
                 <p className="font-semibold text-gray-900">{player.name}</p>
@@ -53,7 +54,7 @@ export default async function RosterPage() {
               <span className={`text-xs font-medium px-3 py-1 rounded-full ${POSITION_COLORS[player.position] ?? "bg-gray-100 text-gray-600"}`}>
                 {player.position}
               </span>
-            </div>
+            </Link>
           ))}
         </div>
       )}
