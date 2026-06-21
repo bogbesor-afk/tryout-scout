@@ -1,6 +1,7 @@
 import { supabase } from "@/lib/supabase";
 import Link from "next/link";
 import RatingsForm from "@/components/RatingsForm";
+import GenerateSummaryButton from "@/components/GenerateSummaryButton";
 
 const POSITION_COLORS: Record<string, string> = {
   Goalkeeper: "bg-yellow-100 text-yellow-800",
@@ -82,6 +83,8 @@ export default async function PlayerDetailPage({
           {summary.overall_assessment && <p className="text-sm text-gray-700 mt-2 italic">{summary.overall_assessment}</p>}
         </div>
       )}
+
+      <GenerateSummaryButton playerId={id} />
 
       <h2 className="text-lg font-bold text-gray-900 mb-4">Coach Ratings</h2>
       <RatingsForm playerId={id} categories={CATEGORIES} existingRatings={ratingsMap} />
