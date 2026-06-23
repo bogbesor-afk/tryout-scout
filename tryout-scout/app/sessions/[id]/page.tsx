@@ -7,6 +7,15 @@ async function getSession(id: string) {
   return data;
 }
 
+async function getPlayers(sessionId: string) {
+  const { data } = await supabase
+    .from("players")
+    .select("*")
+    .eq("session_id", sessionId)
+    .order("created_at", { ascending: true });
+  return data ?? [];
+}
+
 async function getPendingRecordings(sessionId: string) {
   const { data } = await supabase
     .from("recordings")
@@ -24,6 +33,13 @@ function formatDate(dateStr: string) {
   });
 }
 
+const POSITION_EMOJI: Record<string, string> = {
+  Goalkeeper: "🧤",
+  Defender: "🛡️",
+  Midfielder: "⚙️",
+  Forward: "⚡",
+};
+
 export default async function SessionDetailPage({
   params,
 }: {
@@ -31,6 +47,7 @@ export default async function SessionDetailPage({
 }) {
   const { id } = await params;
   const session = await getSession(id);
+  const players = await getPlayers(id);
   const pendingRecordings = await getPendingRecordings(id);
 
   if (!session) {
@@ -64,6 +81,42 @@ export default async function SessionDetailPage({
           <TranscribeButton recordings={pendingRecordings} sessionId={id} />
         </div>
       )}
+
+      {/* Players */}
+      <div className="mb-6">
+        <div className="flex items-center justify-between mb-3">
+          <h2 className="text-base font-semibold text-gray-800">
+            Players ({players.length})
+          </h2>
+          <Link
+            href={`/sessions/${id}/players/new`}
+            className="text-sm text-green-600 font-semibold"
+          >
+            + Add Player
+          </Link>
+        </div>
+
+        {players.length === 0 ? (
+          <p className="text-sm text-gray-400 py-4 text-center">
+            No players yet. Add your first player above.
+          </p>
+        ) : (
+          <div className="flex flex-col gap-2">
+            {players.map((player) => (
+              <div
+                key={player.id}
+                className="bg-white border border-gray-200 rounded-xl px-4 py-3 flex items-center gap-3"
+              >
+                <span className="text-xl">{POSITION_EMOJI[player.position] ?? "⚽"}</span>
+                <div className="flex-1">
+                  <p className="font-medium text-gray-900">{player.name}</p>
+                  <p className="text-sm text-gray-400">#{player.jersey_number} · {player.position}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
 
       <div className="flex flex-col gap-3">
         <Link
