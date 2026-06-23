@@ -5,7 +5,7 @@ export default function Home() {
     <div>
       {/* Hero section */}
       <div
-        className="min-h-screen bg-cover bg-center bg-fixed flex flex-col px-6 pt-16 pb-10 gap-8"
+        className="min-h-screen bg-cover bg-center bg-fixed flex flex-col justify-center px-6 py-10 gap-6"
         style={{
           backgroundImage:
             "url('https://images.unsplash.com/photo-1529900748604-07564a03e7a6?w=1200&q=80')",
