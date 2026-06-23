@@ -26,20 +26,20 @@ export default function NewSessionPage() {
     setSaving(true);
     setError("");
 
-    const { error: dbError } = await supabase.from("sessions").insert({
+    const { data, error: dbError } = await supabase.from("sessions").insert({
       name,
       start_date: startDate,
       end_date: endDate,
       notes,
-    });
+    }).select().single();
 
-    if (dbError) {
+    if (dbError || !data) {
       setError("Something went wrong saving the session. Try again.");
       setSaving(false);
       return;
     }
 
-    router.push("/sessions");
+    router.push(`/sessions/${data.id}`);
   }
 
   return (
