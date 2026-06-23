@@ -15,7 +15,7 @@ export default function HamburgerMenu() {
   const [sessions, setSessions] = useState<Session[]>([]);
 
   useEffect(() => {
-    if (sessionsOpen && sessions.length === 0) {
+    if (sessionsOpen) {
       supabase
         .from("sessions")
         .select("id, name")
