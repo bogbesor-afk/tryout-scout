@@ -14,19 +14,19 @@ export default function Home() {
       <div className="fixed inset-0 bg-black/55 -z-10" />
 
       {/* Hero content */}
-      <div className="relative flex flex-col justify-between min-h-screen px-6 pb-24">
-        <div className="flex flex-col items-center justify-center flex-1 text-center pt-10">
-          <div className="mb-4 text-5xl">⚽</div>
+      <div className="relative flex flex-col items-center justify-center min-h-screen px-6 gap-8">
+        <div className="flex flex-col items-center text-center">
+          <div className="mb-3 text-5xl">⚽</div>
           <h1 className="text-4xl font-bold text-white mb-3 tracking-tight drop-shadow-lg">
             Tryout Scout
           </h1>
-          <p className="text-white text-base max-w-xs leading-relaxed bg-black/30 rounded-xl px-4 py-3">
+          <p className="text-white text-sm max-w-xs leading-relaxed bg-black/30 rounded-xl px-4 py-3">
             Record voice notes during tryouts, rate your players, and let AI build your roster.
           </p>
         </div>
 
         {/* Buttons */}
-        <div className="flex flex-col gap-3 w-full max-w-sm mx-auto">
+        <div className="flex flex-col gap-3 w-full max-w-sm">
           <Link
             href="/sessions/new"
             className="bg-emerald-500 text-white rounded-2xl py-4 text-base font-semibold text-center shadow-lg hover:bg-emerald-600 transition-colors"
