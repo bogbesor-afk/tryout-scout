@@ -2,6 +2,7 @@ import { supabase } from "@/lib/supabase";
 import Link from "next/link";
 import TranscribeButton from "@/components/TranscribeButton";
 
+
 async function getSession(id: string) {
   const { data } = await supabase.from("sessions").select("*").eq("id", id).single();
   return data;
