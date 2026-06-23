@@ -12,7 +12,7 @@ export default function DeleteSessionButton({ sessionId }: { sessionId: string }
   async function handleDelete() {
     setDeleting(true);
     await supabase.from("sessions").delete().eq("id", sessionId);
-    router.push("/sessions");
+    router.push("/");
   }
 
   if (confirming) {
