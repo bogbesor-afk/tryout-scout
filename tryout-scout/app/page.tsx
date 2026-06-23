@@ -1,32 +1,40 @@
 import Link from "next/link";
+import { Bebas_Neue } from "next/font/google";
+
+const bebas = Bebas_Neue({ subsets: ["latin"], weight: "400" });
 
 export default function Home() {
   return (
     <div>
       {/* Hero section */}
       <div
-        className="relative min-h-screen bg-cover bg-center bg-fixed flex flex-col justify-center px-6 py-10 gap-6"
+        className="relative min-h-screen bg-cover bg-center bg-fixed flex flex-col items-center justify-center px-6 gap-8"
         style={{
           backgroundImage:
             "url('https://images.unsplash.com/photo-1529900748604-07564a03e7a6?w=1200&q=80')",
         }}
       >
         {/* Dark overlay */}
-        <div className="absolute inset-0 bg-black/55 pointer-events-none" />
+        <div className="absolute inset-0 bg-black/60 pointer-events-none" />
 
-<div className="relative flex flex-col items-center text-center gap-4 -mt-32">
-          <h1 className="text-6xl font-black text-white tracking-widest uppercase drop-shadow-xl">
+        {/* Title block */}
+        <div className="relative flex flex-col items-center text-center gap-3">
+          <p className="text-emerald-400 text-xs tracking-[0.3em] uppercase font-medium">
+            AI-Powered Evaluation
+          </p>
+          <h1 className={`${bebas.className} text-7xl text-white leading-none tracking-wider drop-shadow-2xl`}>
             Tryout Scout
           </h1>
-          <p className="text-white text-sm max-w-xs leading-relaxed bg-black/30 rounded-xl px-4 py-3">
+          <p className="text-white/70 text-sm max-w-xs leading-relaxed mt-1">
             Record voice notes during tryouts, rate your players, and let AI build your roster.
           </p>
         </div>
 
-        <div className="relative flex flex-col gap-3 w-full max-w-sm mx-auto">
+        {/* CTA */}
+        <div className="relative w-full max-w-xs">
           <Link
             href="/sessions/new"
-            className="bg-emerald-500 text-white rounded-2xl py-4 text-base font-semibold text-center shadow-lg hover:bg-emerald-600 transition-colors"
+            className="block bg-emerald-500 text-white rounded-2xl py-4 text-base font-semibold text-center shadow-xl hover:bg-emerald-600 transition-colors"
           >
             + New Tryout Session
           </Link>

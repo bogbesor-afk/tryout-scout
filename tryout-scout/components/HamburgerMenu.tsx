@@ -17,12 +17,12 @@ export default function HamburgerMenu() {
       {/* Menu button */}
       <button
         onClick={() => setOpen(true)}
-        className="fixed top-4 left-4 z-50 flex flex-col gap-1.5 p-2.5 bg-white/90 backdrop-blur-sm rounded-xl shadow-sm"
+        className="fixed top-4 left-4 z-50 flex flex-col gap-1.5 p-2.5"
         aria-label="Open menu"
       >
-        <span className="block w-5 h-0.5 bg-gray-800" />
-        <span className="block w-5 h-0.5 bg-gray-800" />
-        <span className="block w-5 h-0.5 bg-gray-800" />
+        <span className="block w-6 h-0.5 bg-white drop-shadow-md" />
+        <span className="block w-6 h-0.5 bg-white drop-shadow-md" />
+        <span className="block w-6 h-0.5 bg-white drop-shadow-md" />
       </button>
 
       {/* Backdrop */}
