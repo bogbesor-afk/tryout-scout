@@ -4,7 +4,7 @@ import { supabase } from "@/lib/supabase";
 async function getSessions() {
   const { data } = await supabase
     .from("sessions")
-    .select("*")
+    .select("*, players(id)")
     .order("start_date", { ascending: false });
   return data ?? [];
 }
@@ -42,21 +42,29 @@ export default async function SessionsPage() {
         </div>
       ) : (
         <div className="flex flex-col gap-3">
-          {sessions.map((session) => (
-            <Link
-              key={session.id}
-              href={`/sessions/${session.id}`}
-              className="bg-white border border-gray-200 rounded-xl px-4 py-4 hover:bg-gray-50 transition-colors"
-            >
-              <p className="font-semibold text-gray-900">{session.name}</p>
-              <p className="text-sm text-gray-400 mt-0.5">
-                {formatDate(session.start_date)} — {formatDate(session.end_date)}
-              </p>
-              {session.notes && (
-                <p className="text-sm text-gray-500 mt-1 line-clamp-1">{session.notes}</p>
-              )}
-            </Link>
-          ))}
+          {sessions.map((session) => {
+            const playerCount = session.players?.length ?? 0;
+            return (
+              <Link
+                key={session.id}
+                href={`/sessions/${session.id}`}
+                className="bg-white border border-gray-200 rounded-xl px-4 py-4 hover:bg-gray-50 transition-colors"
+              >
+                <div className="flex items-start justify-between">
+                  <p className="font-semibold text-gray-900">{session.name}</p>
+                  <span className="text-xs text-gray-400 bg-gray-100 rounded-full px-2 py-0.5 ml-2 shrink-0">
+                    {playerCount} {playerCount === 1 ? "player" : "players"}
+                  </span>
+                </div>
+                <p className="text-sm text-gray-400 mt-0.5">
+                  {formatDate(session.start_date)} — {formatDate(session.end_date)}
+                </p>
+                {session.notes && (
+                  <p className="text-sm text-gray-500 mt-1 line-clamp-1">{session.notes}</p>
+                )}
+              </Link>
+            );
+          })}
         </div>
       )}
     </div>

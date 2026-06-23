@@ -26,17 +26,35 @@ export async function POST(req: NextRequest) {
     .select("*")
     .eq("player_id", playerId);
 
-  const { data: playerNotes } = await supabase
-    .from("player_notes")
-    .select("note_text")
-    .eq("player_id", playerId);
+  // Pull all transcripts from the player's session and search for their name/jersey
+  const { data: recordings } = await supabase
+    .from("recordings")
+    .select("id, transcripts(transcript_text)")
+    .eq("session_id", player.session_id)
+    .eq("status", "done");
+
+  const allTranscriptText = recordings
+    ?.flatMap((r: any) => r.transcripts?.map((t: any) => t.transcript_text) ?? [])
+    .join(" ") ?? "";
+
+  // Find sentences that mention the player by name or jersey number
+  const sentences = allTranscriptText.split(/[.!?]+/).filter(Boolean);
+  const relevantSentences = sentences.filter((s) => {
+    const lower = s.toLowerCase();
+    return (
+      lower.includes(player.name.toLowerCase()) ||
+      lower.includes(`#${player.jersey_number}`) ||
+      lower.includes(`number ${player.jersey_number}`) ||
+      lower.includes(`jersey ${player.jersey_number}`)
+    );
+  });
 
   const ratingsText = ratings && ratings.length > 0
     ? ratings.map((r) => `${r.category}: ${r.rating}/10`).join(", ")
     : "No ratings provided";
 
-  const notesText = playerNotes && playerNotes.length > 0
-    ? playerNotes.map((n) => n.note_text).join(" ")
+  const notesText = relevantSentences.length > 0
+    ? relevantSentences.join(". ").trim()
     : "No specific notes recorded";
 
   const prompt = `You are a soccer coach assistant. Based on the following information about a player, write a concise evaluation.
@@ -48,7 +66,7 @@ Jersey: #${player.jersey_number}
 Coach Ratings:
 ${ratingsText}
 
-Coach Notes:
+Coach Notes from Recordings:
 ${notesText}
 
 Write a short evaluation with these four sections:
