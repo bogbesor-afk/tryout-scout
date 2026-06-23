@@ -1,6 +1,7 @@
 import { supabase } from "@/lib/supabase";
 import Link from "next/link";
 import TranscribeButton from "@/components/TranscribeButton";
+import DeleteSessionButton from "@/components/DeleteSessionButton";
 
 async function getSession(id: string) {
   const { data } = await supabase.from("sessions").select("*").eq("id", id).single();
@@ -145,6 +146,7 @@ export default async function SessionDetailPage({
         >
           ⚽ Lineup
         </Link>
+        <DeleteSessionButton sessionId={id} />
       </div>
     </div>
   );
