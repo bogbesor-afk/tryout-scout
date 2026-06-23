@@ -17,11 +17,11 @@ export default function Home() {
       {/* Content */}
       <div className="relative flex flex-col items-center justify-center flex-1 px-6 text-center pt-24 pb-32">
         <div className="mb-4 text-5xl">⚽</div>
-        <h1 className="text-4xl font-bold text-white mb-3 tracking-tight">
+        <h1 className="text-4xl font-bold text-white mb-3 tracking-tight drop-shadow-lg">
           Tryout Scout
         </h1>
-        <p className="text-white/70 text-base max-w-xs leading-relaxed">
-          Capture, evaluate, and build your roster — all from your phone.
+        <p className="text-white text-base max-w-xs leading-relaxed bg-black/30 rounded-xl px-4 py-3">
+          Record voice notes during tryouts, rate your players, and let AI build your roster.
         </p>
       </div>
 
