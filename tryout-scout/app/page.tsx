@@ -1,11 +1,12 @@
 import Link from "next/link";
+import HamburgerMenu from "@/components/HamburgerMenu";
 
 export default function Home() {
   return (
     <div>
       {/* Hero section */}
       <div
-        className="min-h-screen bg-cover bg-center bg-fixed flex flex-col justify-center px-6 py-10 gap-6"
+        className="relative min-h-screen bg-cover bg-center bg-fixed flex flex-col justify-center px-6 py-10 gap-6"
         style={{
           backgroundImage:
             "url('https://images.unsplash.com/photo-1529900748604-07564a03e7a6?w=1200&q=80')",
@@ -13,6 +14,9 @@ export default function Home() {
       >
         {/* Dark overlay */}
         <div className="absolute inset-0 bg-black/55 pointer-events-none" />
+
+        {/* Hamburger menu */}
+        <HamburgerMenu />
 
         <div className="relative flex flex-col items-center text-center gap-4 -mt-32">
           <h1 className="text-6xl font-black text-white tracking-widest uppercase drop-shadow-xl">
@@ -29,18 +33,6 @@ export default function Home() {
             className="bg-emerald-500 text-white rounded-2xl py-4 text-base font-semibold text-center shadow-lg hover:bg-emerald-600 transition-colors"
           >
             + New Tryout Session
-          </Link>
-          <Link
-            href="/sessions"
-            className="bg-white/15 backdrop-blur-sm border border-white/30 text-white rounded-2xl py-4 text-base font-semibold text-center hover:bg-white/25 transition-colors"
-          >
-            View Sessions
-          </Link>
-          <Link
-            href="/roster"
-            className="bg-white/15 backdrop-blur-sm border border-white/30 text-white rounded-2xl py-4 text-base font-semibold text-center hover:bg-white/25 transition-colors"
-          >
-            View Roster
           </Link>
         </div>
       </div>
