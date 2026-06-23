@@ -103,8 +103,9 @@ export default async function SessionDetailPage({
         ) : (
           <div className="flex flex-col gap-2">
             {players.map((player) => (
-              <div
+              <Link
                 key={player.id}
+                href={`/roster/${player.id}`}
                 className="bg-white border border-gray-200 rounded-xl px-4 py-3 flex items-center gap-3"
               >
                 <span className="text-xl">{POSITION_EMOJI[player.position] ?? "⚽"}</span>
@@ -112,7 +113,8 @@ export default async function SessionDetailPage({
                   <p className="font-medium text-gray-900">{player.name}</p>
                   <p className="text-sm text-gray-400">#{player.jersey_number} · {player.position}</p>
                 </div>
-              </div>
+                <span className="text-gray-300 text-sm">›</span>
+              </Link>
             ))}
           </div>
         )}
