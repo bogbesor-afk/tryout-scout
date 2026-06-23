@@ -14,8 +14,8 @@ export default function Home() {
       <div className="fixed inset-0 bg-black/55 -z-10" />
 
       {/* Hero content */}
-      <div className="relative flex flex-col justify-between min-h-screen px-6 pb-28">
-        <div className="flex flex-col items-center justify-center flex-1 text-center pt-24">
+      <div className="relative flex flex-col justify-between min-h-screen px-6 pb-24">
+        <div className="flex flex-col items-center justify-center flex-1 text-center pt-10">
           <div className="mb-4 text-5xl">⚽</div>
           <h1 className="text-4xl font-bold text-white mb-3 tracking-tight drop-shadow-lg">
             Tryout Scout
