@@ -15,8 +15,7 @@ export default function Home() {
         <div className="absolute inset-0 bg-black/55 pointer-events-none" />
 
         <div className="relative flex flex-col items-center text-center gap-4">
-          <div className="text-5xl">⚽</div>
-          <h1 className="text-4xl font-bold text-white tracking-tight drop-shadow-lg">
+          <h1 className="text-5xl font-bold text-white tracking-tight drop-shadow-lg">
             Tryout Scout
           </h1>
           <p className="text-white text-sm max-w-xs leading-relaxed bg-black/30 rounded-xl px-4 py-3">
@@ -57,15 +56,14 @@ export default function Home() {
 
         <div className="flex flex-col gap-4">
           {[
-            { icon: "🎙", title: "Record on the fly", desc: "Tap once to start recording. Call out observations about any player while you watch — no typing, no distraction." },
-            { icon: "📝", title: "Auto-transcribed", desc: "Every recording is automatically converted to text using AI. Read back exactly what you said, organized by time." },
-            { icon: "⭐", title: "Rate each player", desc: "Score players 1–10 across six categories: technical skill, speed, decision making, effort, communication, and positioning." },
-            { icon: "✨", title: "AI-generated evaluations", desc: "Get a written strengths, weaknesses, and overall assessment for every player — generated from your ratings and voice notes." },
-            { icon: "🏆", title: "Position rankings", desc: "See your top goalkeeper, defenders, midfielders, and forwards ranked by score — so roster decisions are easy to justify." },
-            { icon: "⚽", title: "Lineup recommendation", desc: "AI suggests a formation and starting lineup based on your best players, with a written explanation of the reasoning." },
-          ].map(({ icon, title, desc }) => (
-            <div key={title} className="bg-gray-900 rounded-2xl px-5 py-5">
-              <div className="text-3xl mb-2">{icon}</div>
+            { title: "Record on the fly", desc: "Tap once to start recording. Call out observations about any player while you watch — no typing, no distraction." },
+            { title: "Auto-transcribed", desc: "Every recording is automatically converted to text using AI. Read back exactly what you said, organized by time." },
+            { title: "Rate each player", desc: "Score players 1–10 across six categories: technical skill, speed, decision making, effort, communication, and positioning." },
+            { title: "AI-generated evaluations", desc: "Get a written strengths, weaknesses, and overall assessment for every player — generated from your ratings and voice notes." },
+            { title: "Position rankings", desc: "See your top goalkeeper, defenders, midfielders, and forwards ranked by score — so roster decisions are easy to justify." },
+            { title: "Lineup recommendation", desc: "AI suggests a formation and starting lineup based on your best players, with a written explanation of the reasoning." },
+          ].map(({ title, desc }) => (
+            <div key={title} className="bg-gray-900 rounded-2xl px-5 py-5 border-l-4 border-emerald-500">
               <h3 className="font-bold text-white mb-1">{title}</h3>
               <p className="text-gray-400 text-sm leading-relaxed">{desc}</p>
             </div>
