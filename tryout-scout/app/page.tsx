@@ -14,8 +14,8 @@ export default function Home() {
         {/* Dark overlay */}
         <div className="absolute inset-0 bg-black/55 pointer-events-none" />
 
-        <div className="relative flex flex-col items-center text-center gap-4">
-          <h1 className="text-5xl font-bold text-white tracking-tight drop-shadow-lg">
+        <div className="relative flex flex-col items-center text-center gap-4 -mt-8">
+          <h1 className="text-6xl font-black text-white tracking-widest uppercase drop-shadow-xl">
             Tryout Scout
           </h1>
           <p className="text-white text-sm max-w-xs leading-relaxed bg-black/30 rounded-xl px-4 py-3">
