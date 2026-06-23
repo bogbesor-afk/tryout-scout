@@ -15,14 +15,14 @@ export default function HamburgerMenu() {
   const [sessions, setSessions] = useState<Session[]>([]);
 
   useEffect(() => {
-    if (sessionsOpen) {
+    if (open) {
       supabase
         .from("sessions")
         .select("id, name")
         .order("created_at", { ascending: false })
         .then(({ data }) => setSessions(data ?? []));
     }
-  }, [sessionsOpen]);
+  }, [open]);
 
   function close() {
     setOpen(false);
