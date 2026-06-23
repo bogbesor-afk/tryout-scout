@@ -1,5 +1,4 @@
 import Link from "next/link";
-import HamburgerMenu from "@/components/HamburgerMenu";
 
 export default function Home() {
   return (
@@ -15,10 +14,7 @@ export default function Home() {
         {/* Dark overlay */}
         <div className="absolute inset-0 bg-black/55 pointer-events-none" />
 
-        {/* Hamburger menu */}
-        <HamburgerMenu />
-
-        <div className="relative flex flex-col items-center text-center gap-4 -mt-32">
+<div className="relative flex flex-col items-center text-center gap-4 -mt-32">
           <h1 className="text-6xl font-black text-white tracking-widest uppercase drop-shadow-xl">
             Tryout Scout
           </h1>
