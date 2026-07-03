@@ -14,7 +14,7 @@ export default async function RosterPage() {
   const players = await getPlayers();
 
   return (
-    <div className="min-h-screen bg-gray-950 px-6 pt-16 pb-8">
+    <div className="min-h-screen bg-gray-950 px-6 pt-16 pb-8 max-w-md mx-auto">
       <div className="flex items-center justify-between mb-6">
         <h1 className="text-2xl font-bold text-white">Roster</h1>
         <Link

@@ -42,7 +42,7 @@ export default function NewPlayerPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-950 px-6 pt-16 pb-8">
+    <div className="min-h-screen bg-gray-950 px-6 pt-16 pb-8 max-w-md mx-auto">
       <button
         onClick={() => router.back()}
         className="text-sm text-gray-500 mb-6"

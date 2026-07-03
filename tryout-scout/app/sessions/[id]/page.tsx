@@ -47,14 +47,14 @@ export default async function SessionDetailPage({
 
   if (!session) {
     return (
-      <div className="min-h-screen bg-gray-950 px-6 pt-16 pb-8">
+      <div className="min-h-screen bg-gray-950 px-6 pt-16 pb-8 max-w-md mx-auto">
         <p className="text-gray-500">Session not found.</p>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-gray-950 px-6 pt-16 pb-8">
+    <div className="min-h-screen bg-gray-950 px-6 pt-16 pb-8 max-w-md mx-auto">
       <Link href="/sessions" className="text-sm text-gray-500 mb-6 inline-block">
         ← Sessions
       </Link>

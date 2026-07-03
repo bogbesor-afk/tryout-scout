@@ -97,7 +97,7 @@ export default function RecordPage() {
   }
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-950 px-6 pt-16 text-center">
+    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-950 px-6 pt-16 text-center max-w-md mx-auto">
       <button
         onClick={() => router.back()}
         className="absolute top-16 left-6 text-sm text-gray-500"

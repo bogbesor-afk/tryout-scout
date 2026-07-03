@@ -47,13 +47,13 @@ export default async function PlayerDetailPage({
   ]);
 
   if (!player) {
-    return <div className="min-h-screen bg-gray-950 px-6 pt-16 pb-8"><p className="text-gray-500">Player not found.</p></div>;
+    return <div className="min-h-screen bg-gray-950 px-6 pt-16 pb-8 max-w-md mx-auto"><p className="text-gray-500">Player not found.</p></div>;
   }
 
   const ratingsMap = Object.fromEntries(ratings.map((r) => [r.category, r.rating]));
 
   return (
-    <div className="min-h-screen bg-gray-950 px-6 pt-16 pb-8">
+    <div className="min-h-screen bg-gray-950 px-6 pt-16 pb-8 max-w-md mx-auto">
       <Link href="/roster" className="text-sm text-gray-500 mb-6 inline-block">
         ← Roster
       </Link>

@@ -27,7 +27,7 @@ export default async function RankingsPage({
   }
 
   return (
-    <div className="min-h-screen bg-gray-950 px-6 pt-16 pb-8">
+    <div className="min-h-screen bg-gray-950 px-6 pt-16 pb-8 max-w-md mx-auto">
       <Link href={`/sessions/${id}`} className="text-sm text-gray-500 mb-6 inline-block">
         ← Back to Session
       </Link>
