@@ -27,7 +27,7 @@ export default function DeleteSessionButton({ sessionId }: { sessionId: string }
         </button>
         <button
           onClick={() => setConfirming(false)}
-          className="flex-1 bg-gray-100 text-gray-700 rounded-xl py-3 text-sm font-semibold"
+          className="flex-1 bg-gray-800 text-gray-300 rounded-xl py-3 text-sm font-semibold"
         >
           Cancel
         </button>
@@ -38,7 +38,7 @@ export default function DeleteSessionButton({ sessionId }: { sessionId: string }
   return (
     <button
       onClick={() => setConfirming(true)}
-      className="w-full mt-2 border border-red-200 text-red-500 rounded-xl py-3 text-sm font-semibold hover:bg-red-50 transition-colors"
+      className="w-full mt-2 border border-red-500/20 text-red-400 rounded-xl py-3 text-sm font-semibold hover:bg-red-500/10 transition-colors"
     >
       Delete Session
     </button>

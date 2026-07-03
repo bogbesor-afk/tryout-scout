@@ -28,20 +28,19 @@ export default async function TimelinePage({
   const recordings = await getTranscripts(id);
 
   return (
-    <div className="px-6 py-8">
-      <Link href={`/sessions/${id}`} className="text-sm text-gray-400 mb-6 flex items-center gap-1">
+    <div className="min-h-screen bg-gray-950 px-6 pt-16 pb-8">
+      <Link href={`/sessions/${id}`} className="text-sm text-gray-500 mb-6 inline-block">
         ← Back to Session
       </Link>
 
-      <h1 className="text-2xl font-bold text-gray-900 mb-6">Timeline</h1>
+      <h1 className="text-2xl font-bold text-white mb-6">Timeline</h1>
 
       {recordings.length === 0 ? (
-        <div className="text-center text-gray-400 mt-20">
-          <div className="text-4xl mb-3">📝</div>
+        <div className="text-center text-gray-500 mt-20">
           <p className="text-sm">No transcripts yet.</p>
           <Link
             href={`/sessions/${id}/record`}
-            className="text-green-600 text-sm font-medium mt-2 inline-block"
+            className="text-emerald-400 text-sm font-medium mt-2 inline-block"
           >
             Start recording →
           </Link>
@@ -52,9 +51,9 @@ export default async function TimelinePage({
             const transcript = recording.transcripts?.[0];
             if (!transcript) return null;
             return (
-              <div key={recording.id} className="bg-white border border-gray-200 rounded-xl px-4 py-4">
-                <p className="text-xs text-gray-400 mb-2">{formatTime(recording.created_at)}</p>
-                <p className="text-sm text-gray-800 leading-relaxed">{transcript.transcript_text}</p>
+              <div key={recording.id} className="bg-gray-900 border border-gray-800 rounded-xl px-4 py-4">
+                <p className="text-xs text-gray-500 mb-2">{formatTime(recording.created_at)}</p>
+                <p className="text-sm text-gray-300 leading-relaxed">{transcript.transcript_text}</p>
               </div>
             );
           })}

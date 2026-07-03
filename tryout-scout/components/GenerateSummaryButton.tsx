@@ -33,11 +33,11 @@ export default function GenerateSummaryButton({ playerId }: { playerId: string }
       <button
         onClick={handleGenerate}
         disabled={loading}
-        className="w-full bg-blue-600 text-white rounded-xl py-3 text-sm font-semibold hover:bg-blue-700 transition-colors disabled:opacity-50"
+        className="w-full bg-emerald-500 text-white rounded-xl py-3 text-sm font-semibold hover:bg-emerald-600 transition-colors disabled:opacity-50"
       >
-        {loading ? "Generating..." : "✨ Generate AI Summary"}
+        {loading ? "Generating..." : "Generate AI Summary"}
       </button>
-      {error && <p className="text-red-500 text-xs mt-2 text-center">{error}</p>}
+      {error && <p className="text-red-400 text-xs mt-2 text-center">{error}</p>}
     </div>
   );
 }

@@ -43,18 +43,18 @@ export default function TranscribeButton({
     router.refresh();
   }
 
-  if (done) return <p className="text-sm text-green-700 font-medium">✓ Transcription complete!</p>;
+  if (done) return <p className="text-sm text-emerald-400 font-medium">Transcription complete!</p>;
 
   return (
     <div>
       <button
         onClick={handleTranscribe}
         disabled={loading}
-        className="bg-yellow-500 text-white rounded-lg px-4 py-2 text-sm font-semibold hover:bg-yellow-600 transition-colors disabled:opacity-50"
+        className="bg-amber-500 text-white rounded-lg px-4 py-2 text-sm font-semibold hover:bg-amber-600 transition-colors disabled:opacity-50"
       >
         {loading ? "Transcribing..." : "Transcribe Now"}
       </button>
-      {error && <p className="text-red-500 text-xs mt-2">{error}</p>}
+      {error && <p className="text-red-400 text-xs mt-2">{error}</p>}
     </div>
   );
 }

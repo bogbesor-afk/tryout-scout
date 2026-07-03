@@ -97,16 +97,16 @@ export default function RecordPage() {
   }
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen px-6 text-center">
+    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-950 px-6 pt-16 text-center">
       <button
         onClick={() => router.back()}
-        className="absolute top-6 left-6 text-sm text-gray-400"
+        className="absolute top-16 left-6 text-sm text-gray-500"
       >
         ← Back
       </button>
 
-      <h1 className="text-xl font-bold text-gray-900 mb-2">Record Notes</h1>
-      <p className="text-sm text-gray-400 mb-12">
+      <h1 className="text-xl font-bold text-white mb-2">Record Notes</h1>
+      <p className="text-sm text-gray-500 mb-12">
         {status === "idle" && "Tap the button to start recording."}
         {status === "recording" && "Recording... tap to stop."}
         {status === "saving" && "Saving your recording..."}
@@ -116,22 +116,27 @@ export default function RecordPage() {
 
       {(status === "idle" || status === "recording") && (
         <>
-          <div className="text-4xl font-mono font-bold text-gray-800 mb-10">
+          <div className="text-4xl font-mono font-bold text-gray-300 mb-10">
             {formatTime(seconds)}
           </div>
 
           <button
             onClick={recording ? stopRecording : startRecording}
-            className={`w-28 h-28 rounded-full text-white text-4xl shadow-lg transition-all ${
+            aria-label={recording ? "Stop recording" : "Start recording"}
+            className={`flex items-center justify-center w-28 h-28 rounded-full shadow-lg transition-all ${
               recording
                 ? "bg-red-500 hover:bg-red-600 animate-pulse"
-                : "bg-green-600 hover:bg-green-700"
+                : "bg-emerald-500 hover:bg-emerald-600"
             }`}
           >
-            {recording ? "⏹" : "🎙"}
+            {recording ? (
+              <span className="block w-7 h-7 bg-white rounded-md" />
+            ) : (
+              <span className="block w-9 h-9 bg-white rounded-full" />
+            )}
           </button>
 
-          <p className="text-xs text-gray-400 mt-6">
+          <p className="text-xs text-gray-500 mt-6">
             {recording ? "Tap to stop" : "Tap to record"}
           </p>
         </>
@@ -139,19 +144,21 @@ export default function RecordPage() {
 
       {status === "done" && (
         <div className="flex flex-col gap-4 w-full max-w-xs">
-          <div className="text-5xl mb-2">✅</div>
+          <div className="flex items-center justify-center w-14 h-14 rounded-full bg-emerald-500/10 mx-auto mb-2">
+            <span className="text-emerald-400 text-2xl">✓</span>
+          </div>
           <button
             onClick={() => {
               setStatus("idle");
               setSeconds(0);
             }}
-            className="bg-green-600 text-white rounded-xl py-4 text-base font-semibold hover:bg-green-700 transition-colors"
+            className="bg-emerald-500 text-white rounded-xl py-4 text-base font-semibold hover:bg-emerald-600 transition-colors"
           >
             Record Another
           </button>
           <button
             onClick={() => router.push(`/sessions/${sessionId}`)}
-            className="bg-white border border-gray-200 text-gray-700 rounded-xl py-4 text-base font-semibold hover:bg-gray-50 transition-colors"
+            className="bg-gray-900 border border-gray-800 text-gray-300 rounded-xl py-4 text-base font-semibold hover:bg-gray-800 transition-colors"
           >
             Back to Session
           </button>
@@ -161,7 +168,7 @@ export default function RecordPage() {
       {status === "error" && (
         <button
           onClick={() => setStatus("idle")}
-          className="mt-6 bg-white border border-gray-200 text-gray-700 rounded-xl px-6 py-3 text-sm font-semibold"
+          className="mt-6 bg-gray-900 border border-gray-800 text-gray-300 rounded-xl px-6 py-3 text-sm font-semibold"
         >
           Try Again
         </button>

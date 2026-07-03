@@ -34,11 +34,11 @@ export default function GenerateRankingsButton({ sessionId }: { sessionId: strin
       <button
         onClick={handleGenerate}
         disabled={loading}
-        className="w-full bg-green-600 text-white rounded-xl py-3 text-sm font-semibold hover:bg-green-700 transition-colors disabled:opacity-50"
+        className="w-full bg-emerald-500 text-white rounded-xl py-3 text-sm font-semibold hover:bg-emerald-600 transition-colors disabled:opacity-50"
       >
-        {loading ? "Generating..." : "🏆 Generate Rankings"}
+        {loading ? "Generating..." : "Generate Rankings"}
       </button>
-      {error && <p className="text-red-500 text-xs mt-2 text-center">{error}</p>}
+      {error && <p className="text-red-400 text-xs mt-2 text-center">{error}</p>}
     </div>
   );
 }

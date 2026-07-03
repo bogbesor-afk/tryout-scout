@@ -42,19 +42,19 @@ export default function NewPlayerPage() {
   }
 
   return (
-    <div className="px-6 py-8 max-w-md mx-auto">
+    <div className="min-h-screen bg-gray-950 px-6 pt-16 pb-8 max-w-md mx-auto">
       <button
         onClick={() => router.back()}
-        className="text-sm text-gray-400 mb-6 flex items-center gap-1"
+        className="text-sm text-gray-500 mb-6"
       >
         ← Back
       </button>
 
-      <h1 className="text-2xl font-bold text-gray-900 mb-6">Add Player</h1>
+      <h1 className="text-2xl font-bold text-white mb-6">Add Player</h1>
 
       <form onSubmit={handleSubmit} className="flex flex-col gap-5">
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">
+          <label className="block text-sm font-medium text-gray-300 mb-1">
             Player Name
           </label>
           <input
@@ -62,12 +62,12 @@ export default function NewPlayerPage() {
             value={name}
             onChange={(e) => setName(e.target.value)}
             placeholder="e.g. Marcus Johnson"
-            className="w-full border border-gray-300 rounded-xl px-4 py-3 text-base focus:outline-none focus:ring-2 focus:ring-green-500"
+            className="w-full bg-gray-900 border border-gray-800 text-white placeholder-gray-600 rounded-xl px-4 py-3 text-base focus:outline-none focus:ring-2 focus:ring-emerald-500"
           />
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">
+          <label className="block text-sm font-medium text-gray-300 mb-1">
             Jersey Number
           </label>
           <input
@@ -75,18 +75,18 @@ export default function NewPlayerPage() {
             value={jerseyNumber}
             onChange={(e) => setJerseyNumber(e.target.value)}
             placeholder="e.g. 10"
-            className="w-full border border-gray-300 rounded-xl px-4 py-3 text-base focus:outline-none focus:ring-2 focus:ring-green-500"
+            className="w-full bg-gray-900 border border-gray-800 text-white placeholder-gray-600 rounded-xl px-4 py-3 text-base focus:outline-none focus:ring-2 focus:ring-emerald-500"
           />
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">
+          <label className="block text-sm font-medium text-gray-300 mb-1">
             Position
           </label>
           <select
             value={position}
             onChange={(e) => setPosition(e.target.value)}
-            className="w-full border border-gray-300 rounded-xl px-4 py-3 text-base focus:outline-none focus:ring-2 focus:ring-green-500 bg-white"
+            className="w-full bg-gray-900 border border-gray-800 text-white rounded-xl px-4 py-3 text-base focus:outline-none focus:ring-2 focus:ring-emerald-500"
           >
             <option value="">Select a position</option>
             {POSITIONS.map((p) => (
@@ -98,24 +98,24 @@ export default function NewPlayerPage() {
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">
-            Notes <span className="text-gray-400 font-normal">(optional)</span>
+          <label className="block text-sm font-medium text-gray-300 mb-1">
+            Notes <span className="text-gray-500 font-normal">(optional)</span>
           </label>
           <textarea
             value={notes}
             onChange={(e) => setNotes(e.target.value)}
             placeholder="Any initial observations..."
             rows={3}
-            className="w-full border border-gray-300 rounded-xl px-4 py-3 text-base focus:outline-none focus:ring-2 focus:ring-green-500 resize-none"
+            className="w-full bg-gray-900 border border-gray-800 text-white placeholder-gray-600 rounded-xl px-4 py-3 text-base focus:outline-none focus:ring-2 focus:ring-emerald-500 resize-none"
           />
         </div>
 
-        {error && <p className="text-red-500 text-sm">{error}</p>}
+        {error && <p className="text-red-400 text-sm">{error}</p>}
 
         <button
           type="submit"
           disabled={saving}
-          className="bg-green-600 text-white rounded-xl py-4 text-base font-semibold hover:bg-green-700 transition-colors disabled:opacity-50"
+          className="bg-emerald-500 text-white rounded-xl py-4 text-base font-semibold hover:bg-emerald-600 transition-colors disabled:opacity-50"
         >
           {saving ? "Saving..." : "Save Player"}
         </button>

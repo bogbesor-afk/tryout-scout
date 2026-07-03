@@ -58,8 +58,8 @@ export default function RatingsForm({
       {categories.map(({ key, label }) => (
         <div key={key}>
           <div className="flex justify-between items-center mb-1">
-            <label className="text-sm font-medium text-gray-700">{label}</label>
-            <span className="text-sm font-bold text-green-600">{ratings[key] ?? "—"}</span>
+            <label className="text-sm font-medium text-gray-300">{label}</label>
+            <span className="text-sm font-bold text-emerald-400">{ratings[key] ?? "—"}</span>
           </div>
           <input
             type="range"
@@ -67,9 +67,9 @@ export default function RatingsForm({
             max={10}
             value={ratings[key] ?? 5}
             onChange={(e) => setRatings({ ...ratings, [key]: Number(e.target.value) })}
-            className="w-full accent-green-600"
+            className="w-full accent-emerald-500"
           />
-          <div className="flex justify-between text-xs text-gray-400 mt-0.5">
+          <div className="flex justify-between text-xs text-gray-600 mt-0.5">
             <span>1</span>
             <span>10</span>
           </div>
@@ -79,12 +79,12 @@ export default function RatingsForm({
       <button
         onClick={handleSave}
         disabled={saving}
-        className="bg-green-600 text-white rounded-xl py-4 text-base font-semibold hover:bg-green-700 transition-colors disabled:opacity-50 mt-2"
+        className="bg-emerald-500 text-white rounded-xl py-4 text-base font-semibold hover:bg-emerald-600 transition-colors disabled:opacity-50 mt-2"
       >
         {saving ? "Saving..." : "Save Ratings"}
       </button>
 
-      {saved && <p className="text-green-600 text-sm text-center">Ratings saved!</p>}
+      {saved && <p className="text-emerald-400 text-sm text-center">Ratings saved!</p>}
     </div>
   );
 }
