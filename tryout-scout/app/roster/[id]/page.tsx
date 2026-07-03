@@ -53,7 +53,7 @@ export default async function PlayerDetailPage({
   const ratingsMap = Object.fromEntries(ratings.map((r) => [r.category, r.rating]));
 
   return (
-    <div className="min-h-screen bg-gray-950 px-6 pt-16 pb-8 max-w-md mx-auto">
+    <div className="min-h-screen bg-gray-950 px-6 pt-16 pb-8">
       <Link href="/roster" className="text-sm text-gray-500 mb-6 inline-block">
         ← Roster
       </Link>

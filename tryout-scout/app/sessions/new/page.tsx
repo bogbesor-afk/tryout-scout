@@ -43,7 +43,7 @@ export default function NewSessionPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-950 px-6 pt-16 pb-8 max-w-md mx-auto">
+    <div className="min-h-screen bg-gray-950 px-6 pt-16 pb-8">
       <button
         onClick={() => router.back()}
         className="text-sm text-gray-500 mb-6"
