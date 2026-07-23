@@ -4,8 +4,8 @@
     {
       "name": "tryout-scout-dev",
       "runtimeExecutable": "npm",
-      "runtimeArgs": ["run", "dev", "--prefix", "tryout-scout"],
-      "port": 3000
+      "runtimeArgs": ["run", "dev", "--prefix", "tryout-scout", "--", "--port", "3210"],
+      "port": 3210
     }
   ]
 }
