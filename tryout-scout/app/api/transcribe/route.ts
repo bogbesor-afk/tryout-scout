@@ -52,8 +52,20 @@ export async function POST(req: NextRequest) {
             .join(", ")}.`
         : undefined;
 
-    // Send audio to OpenAI Whisper for transcription
-    const file = new File([fileData], "recording.webm", { type: "audio/webm" });
+    // Send audio to OpenAI Whisper for transcription. The filename's
+    // extension must match how the browser actually recorded it (iOS Safari
+    // can't produce webm, only Chrome/Firefox can), so we derive it from the
+    // stored file path instead of assuming webm.
+    const extension = recording.file_path.split(".").pop() ?? "webm";
+    const mimeTypeByExtension: Record<string, string> = {
+      webm: "audio/webm",
+      m4a: "audio/mp4",
+      mp3: "audio/mpeg",
+      ogg: "audio/ogg",
+    };
+    const file = new File([fileData], `recording.${extension}`, {
+      type: mimeTypeByExtension[extension] ?? "audio/webm",
+    });
 
     const transcription = await openai.audio.transcriptions.create({
       file,

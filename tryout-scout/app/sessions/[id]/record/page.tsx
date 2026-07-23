@@ -17,6 +17,28 @@ export default function RecordPage() {
   const mediaRecorderRef = useRef<MediaRecorder | null>(null);
   const chunksRef = useRef<Blob[]>([]);
   const timerRef = useRef<ReturnType<typeof setInterval> | null>(null);
+  const mimeTypeRef = useRef<string>("audio/webm");
+
+  // iOS Safari doesn't support audio/webm at all, so we need to ask the
+  // browser what it can actually record and match the filename/blob type to
+  // it — otherwise Safari recordings get silently mislabeled and Whisper
+  // can fail to read them.
+  function pickSupportedMimeType() {
+    const candidates = ["audio/webm;codecs=opus", "audio/webm", "audio/mp4", "audio/mpeg", "audio/ogg"];
+    for (const type of candidates) {
+      if (typeof MediaRecorder !== "undefined" && MediaRecorder.isTypeSupported(type)) {
+        return type;
+      }
+    }
+    return "";
+  }
+
+  function extensionForMimeType(mimeType: string) {
+    if (mimeType.includes("mp4")) return "m4a";
+    if (mimeType.includes("mpeg")) return "mp3";
+    if (mimeType.includes("ogg")) return "ogg";
+    return "webm";
+  }
 
   useEffect(() => {
     return () => {
@@ -33,7 +55,9 @@ export default function RecordPage() {
   async function startRecording() {
     try {
       const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
-      const mediaRecorder = new MediaRecorder(stream);
+      const mimeType = pickSupportedMimeType();
+      mimeTypeRef.current = mimeType || "audio/webm";
+      const mediaRecorder = mimeType ? new MediaRecorder(stream, { mimeType }) : new MediaRecorder(stream);
       mediaRecorderRef.current = mediaRecorder;
       chunksRef.current = [];
 
@@ -63,8 +87,9 @@ export default function RecordPage() {
     setStatus("saving");
 
     mediaRecorderRef.current.onstop = async () => {
-      const blob = new Blob(chunksRef.current, { type: "audio/webm" });
-      const fileName = `${sessionId}/${Date.now()}.webm`;
+      const mimeType = mimeTypeRef.current;
+      const blob = new Blob(chunksRef.current, { type: mimeType });
+      const fileName = `${sessionId}/${Date.now()}.${extensionForMimeType(mimeType)}`;
 
       const { error: uploadError } = await supabase.storage
         .from("recordings")

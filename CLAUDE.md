@@ -91,7 +91,9 @@ These decisions were made during planning and should not be revisited unless Ben
 - Transcript is retained; audio file is discarded after transcription
 - Jersey number and player name are treated as equivalent identifiers
 - Coach ratings carry more weight than AI judgment in all outputs
-- No PDF export in MVP
+- PDF and CSV export of a session report (roster, ratings, AI summaries, rankings, lineup)
+  were added 2026-07-23 at Benjamin's request — this supersedes the earlier "no export"
+  decision. Export runs entirely client-side (jsPDF), no server/API changes needed.
 - No offline support required
 - Budget target: under $30/month
 
@@ -184,16 +186,22 @@ app/
     [id]/rankings/page.tsx        → Position rankings
     [id]/lineup/page.tsx          → Lineup recommendation
   roster/
-    page.tsx                      → Roster list
+    page.tsx                      → Roster list (search + sort, players not tied to a session)
     new/page.tsx                  → Add new player
-    [id]/page.tsx                 → Player detail
-    [id]/edit/page.tsx            → Edit player
+    [id]/page.tsx                 → Player detail (ratings + AI summary)
   api/
-    transcribe/route.ts           → Sends audio to OpenAI Whisper
+    transcribe/route.ts           → Sends audio to OpenAI Whisper (with roster-name context)
     generate-summary/route.ts     → Generates player summary with GPT-4o
     generate-lineup/route.ts      → Generates lineup recommendation
     rank-players/route.ts         → Generates position rankings
+lib/
+  soccer-knowledge.ts              → Formations/tactics/evaluation reference given to the AI
+  positions.ts                     → Shared position badge colors
 ```
+
+Note: `roster/[id]/edit` doesn't exist yet (not built). `sessions/page.tsx` just redirects to
+the homepage — there's no separate sessions list page, the session list lives in the
+hamburger menu.
 
 ---
 
@@ -201,8 +209,24 @@ app/
 
 Track which week and day of the plan is currently active. Update this section at the start of each work session.
 
-**Current phase:** Pre-build (CLAUDE.md and plan files created, no Next.js app yet)
-**Next step:** Week 1, Day 1 — Install tools and create accounts
+**Current phase:** Post-MVP polish. The full core workflow is built and deployed: sessions,
+multi-day support, manual roster, recording, transcription, timeline, coach ratings, AI
+summaries, position rankings, lineup recommendation, PDF/CSV export, and a consistent dark
+mobile-first design across every page.
+
+**Known issue (2026-07-23, unresolved):** The Supabase project the app points to
+(`qnvomzwgnjfpnnyltlfo.supabase.co`, from `.env.local` and Vercel's env vars) no longer
+resolves in DNS — confirmed via multiple public DNS resolvers, and confirmed on the live
+`tryout-scout.vercel.app` site itself (Roster page renders "No players yet" with no real
+data). This means the project was very likely deleted or expired (Supabase free-tier
+projects get paused after inactivity and can eventually be removed), not a transient outage —
+Supabase's own status page is up. **This needs Benjamin to log into supabase.com, check the
+project's status, and either restore it or create a new project** and update the connection
+values in both `.env.local` and Vercel's project settings. Nothing in the app code can fix
+this — it needs dashboard access only Benjamin has.
+
+**Next step:** Restore/recreate the Supabase project, then re-verify the full workflow end to
+end now that error handling and data-cleanup fixes are in place.
 
 **12-Week Plan Summary:**
 - Week 1: Environment setup
