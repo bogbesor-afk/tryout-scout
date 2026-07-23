@@ -13,13 +13,21 @@ async function getLineup(sessionId: string) {
   return data;
 }
 
+async function getPlayerCount(sessionId: string) {
+  const { count } = await supabase
+    .from("players")
+    .select("id", { count: "exact", head: true })
+    .eq("session_id", sessionId);
+  return count ?? 0;
+}
+
 export default async function LineupPage({
   params,
 }: {
   params: Promise<{ id: string }>;
 }) {
   const { id } = await params;
-  const lineup = await getLineup(id);
+  const [lineup, playerCount] = await Promise.all([getLineup(id), getPlayerCount(id)]);
 
   return (
     <div className="min-h-screen bg-gray-950 px-6 pt-16 pb-8 max-w-md mx-auto">
@@ -29,11 +37,15 @@ export default async function LineupPage({
 
       <h1 className="text-2xl font-bold text-white mb-6">Lineup</h1>
 
-      <GenerateLineupButton sessionId={id} />
+      <GenerateLineupButton sessionId={id} disabled={playerCount === 0} />
 
-      {!lineup ? (
+      {playerCount === 0 ? (
         <div className="text-center text-gray-500 mt-12">
-          <p className="text-sm">No lineup yet. Add players to this session and rate them first.</p>
+          <p className="text-sm">Add players to this session before generating a lineup.</p>
+        </div>
+      ) : !lineup ? (
+        <div className="text-center text-gray-500 mt-12">
+          <p className="text-sm">No lineup yet. Rate your players, then generate a lineup above.</p>
         </div>
       ) : (
         <div className="mt-6">

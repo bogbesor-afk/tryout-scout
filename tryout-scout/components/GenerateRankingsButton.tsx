@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 
-export default function GenerateRankingsButton({ sessionId }: { sessionId: string }) {
+export default function GenerateRankingsButton({ sessionId, disabled }: { sessionId: string; disabled?: boolean }) {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
@@ -33,8 +33,8 @@ export default function GenerateRankingsButton({ sessionId }: { sessionId: strin
     <div className="mb-2">
       <button
         onClick={handleGenerate}
-        disabled={loading}
-        className="w-full bg-emerald-500 text-white rounded-xl py-3 text-sm font-semibold hover:bg-emerald-600 transition-colors disabled:opacity-50"
+        disabled={loading || disabled}
+        className="w-full bg-emerald-500 text-white rounded-xl py-3 text-sm font-semibold hover:bg-emerald-600 transition-colors disabled:opacity-40"
       >
         {loading ? "Generating..." : "Generate Rankings"}
       </button>

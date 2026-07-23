@@ -19,7 +19,8 @@ export default function GenerateSummaryButton({ playerId }: { playerId: string }
     });
 
     if (!res.ok) {
-      setError("Failed to generate summary. Try again.");
+      const data = await res.json().catch(() => null);
+      setError(data?.error ?? "Failed to generate summary. Try again.");
       setLoading(false);
       return;
     }

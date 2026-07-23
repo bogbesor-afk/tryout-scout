@@ -2,6 +2,7 @@ import { supabase } from "@/lib/supabase";
 import Link from "next/link";
 import TranscribeButton from "@/components/TranscribeButton";
 import DeleteSessionButton from "@/components/DeleteSessionButton";
+import ExportReportButton from "@/components/ExportReportButton";
 import { POSITION_COLORS } from "@/lib/positions";
 
 async function getSession(id: string) {
@@ -73,7 +74,7 @@ export default async function SessionDetailPage({
           <p className="text-sm font-medium text-amber-400 mb-2">
             {pendingRecordings.length} recording{pendingRecordings.length > 1 ? "s" : ""} ready to transcribe
           </p>
-          <TranscribeButton recordings={pendingRecordings} sessionId={id} />
+          <TranscribeButton recordings={pendingRecordings} />
         </div>
       )}
 
@@ -144,6 +145,8 @@ export default async function SessionDetailPage({
             Lineup
           </Link>
         </div>
+
+        <ExportReportButton sessionId={id} />
 
         <DeleteSessionButton sessionId={id} />
       </div>

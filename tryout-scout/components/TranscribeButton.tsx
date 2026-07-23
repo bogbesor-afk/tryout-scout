@@ -10,10 +10,8 @@ interface Recording {
 
 export default function TranscribeButton({
   recordings,
-  sessionId,
 }: {
   recordings: Recording[];
-  sessionId: string;
 }) {
   const router = useRouter();
   const [loading, setLoading] = useState(false);

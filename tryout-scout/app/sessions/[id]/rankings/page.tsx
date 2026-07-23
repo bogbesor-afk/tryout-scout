@@ -12,13 +12,21 @@ async function getRankings(sessionId: string) {
   return data ?? [];
 }
 
+async function getPlayerCount(sessionId: string) {
+  const { count } = await supabase
+    .from("players")
+    .select("id", { count: "exact", head: true })
+    .eq("session_id", sessionId);
+  return count ?? 0;
+}
+
 export default async function RankingsPage({
   params,
 }: {
   params: Promise<{ id: string }>;
 }) {
   const { id } = await params;
-  const rankings = await getRankings(id);
+  const [rankings, playerCount] = await Promise.all([getRankings(id), getPlayerCount(id)]);
 
   const byPosition: Record<string, typeof rankings> = {};
   for (const r of rankings) {
@@ -34,11 +42,15 @@ export default async function RankingsPage({
 
       <h1 className="text-2xl font-bold text-white mb-6">Rankings</h1>
 
-      <GenerateRankingsButton sessionId={id} />
+      <GenerateRankingsButton sessionId={id} disabled={playerCount === 0} />
 
-      {rankings.length === 0 ? (
+      {playerCount === 0 ? (
         <div className="text-center text-gray-500 mt-12">
-          <p className="text-sm">No rankings yet. Add players to this session and rate them first.</p>
+          <p className="text-sm">Add players to this session before generating rankings.</p>
+        </div>
+      ) : rankings.length === 0 ? (
+        <div className="text-center text-gray-500 mt-12">
+          <p className="text-sm">No rankings yet. Rate your players, then generate rankings above.</p>
         </div>
       ) : (
         <div className="flex flex-col gap-6 mt-6">

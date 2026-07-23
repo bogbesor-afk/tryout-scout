@@ -1,7 +1,13 @@
 import { supabase } from "@/lib/supabase";
 import Link from "next/link";
 
-async function getTranscripts(sessionId: string) {
+interface RecordingWithTranscript {
+  id: string;
+  created_at: string;
+  transcripts: { transcript_text: string }[] | null;
+}
+
+async function getTranscripts(sessionId: string): Promise<RecordingWithTranscript[]> {
   const { data } = await supabase
     .from("recordings")
     .select("id, created_at, transcripts(transcript_text)")
@@ -47,7 +53,7 @@ export default async function TimelinePage({
         </div>
       ) : (
         <div className="flex flex-col gap-4">
-          {recordings.map((recording: any) => {
+          {recordings.map((recording) => {
             const transcript = recording.transcripts?.[0];
             if (!transcript) return null;
             return (

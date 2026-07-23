@@ -1,17 +1,31 @@
 import Link from "next/link";
 import { supabase } from "@/lib/supabase";
-import { POSITION_COLORS } from "@/lib/positions";
+import RosterList from "@/components/RosterList";
 
-async function getPlayers() {
-  const { data } = await supabase
+async function getPlayersWithRatings() {
+  const { data: players } = await supabase
     .from("players")
     .select("*")
     .order("created_at", { ascending: false });
-  return data ?? [];
+
+  if (!players || players.length === 0) return [];
+
+  const { data: ratings } = await supabase
+    .from("coach_ratings")
+    .select("player_id, rating")
+    .in("player_id", players.map((p) => p.id));
+
+  return players.map((player) => {
+    const playerRatings = (ratings ?? []).filter((r) => r.player_id === player.id);
+    const avgRating = playerRatings.length > 0
+      ? playerRatings.reduce((sum, r) => sum + r.rating, 0) / playerRatings.length
+      : null;
+    return { ...player, avgRating };
+  });
 }
 
 export default async function RosterPage() {
-  const players = await getPlayers();
+  const players = await getPlayersWithRatings();
 
   return (
     <div className="min-h-screen bg-gray-950 px-6 pt-16 pb-8 max-w-md mx-auto">
@@ -25,32 +39,7 @@ export default async function RosterPage() {
         </Link>
       </div>
 
-      {players.length === 0 ? (
-        <div className="text-center text-gray-500 mt-20">
-          <p className="text-sm">No players yet.</p>
-          <Link href="/roster/new" className="text-emerald-400 text-sm font-medium mt-2 inline-block">
-            Add your first player →
-          </Link>
-        </div>
-      ) : (
-        <div className="flex flex-col gap-3">
-          {players.map((player) => (
-            <Link
-              key={player.id}
-              href={`/roster/${player.id}`}
-              className="bg-gray-900 border border-gray-800 rounded-xl px-4 py-4 flex items-center justify-between hover:bg-gray-800 transition-colors"
-            >
-              <div>
-                <p className="font-semibold text-white">{player.name}</p>
-                <p className="text-sm text-gray-500">#{player.jersey_number}</p>
-              </div>
-              <span className={`text-xs font-medium px-3 py-1 rounded-full ${POSITION_COLORS[player.position] ?? "bg-gray-500/10 text-gray-400"}`}>
-                {player.position}
-              </span>
-            </Link>
-          ))}
-        </div>
-      )}
+      <RosterList players={players} />
     </div>
   );
 }
