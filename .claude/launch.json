@@ -6,6 +6,12 @@
       "runtimeExecutable": "npm",
       "runtimeArgs": ["run", "dev", "--prefix", "tryout-scout", "--", "--port", "3210"],
       "port": 3210
+    },
+    {
+      "name": "bingusos-dev",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["run", "dev", "--prefix", "/Users/benjaminogbesor/Desktop/BingusOS", "--", "--port", "3211"],
+      "port": 3211
     }
   ]
 }
