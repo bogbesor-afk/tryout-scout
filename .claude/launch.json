@@ -12,6 +12,12 @@
       "runtimeExecutable": "npm",
       "runtimeArgs": ["run", "dev", "--prefix", "/Users/benjaminogbesor/Desktop/BingusOS", "--", "--port", "3211"],
       "port": 3211
+    },
+    {
+      "name": "bingusbread-dev",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["run", "dev", "--prefix", "/Users/benjaminogbesor/Desktop/bingusbread", "--", "--port", "3212"],
+      "port": 3212
     }
   ]
 }
