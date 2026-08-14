@@ -8,9 +8,9 @@
       "port": 3210
     },
     {
-      "name": "bingusos-dev",
+      "name": "bingusschool-dev",
       "runtimeExecutable": "npm",
-      "runtimeArgs": ["run", "dev", "--prefix", "/Users/benjaminogbesor/Desktop/BingusOS", "--", "--port", "3211"],
+      "runtimeArgs": ["run", "dev", "--prefix", "/Users/benjaminogbesor/Desktop/BingusSchool", "--", "--port", "3211"],
       "port": 3211
     },
     {
